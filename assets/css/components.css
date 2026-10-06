@@ -867,25 +867,43 @@
 
 /* ============================ COOKIE MODAL ============================ */
 .cookie-modal {
-  border: 1px solid var(--sepia-linea, #B9A181);
+  /* Centrado absoluto garantizado */
+  position: fixed;
+  inset: 0;
+  margin: auto;
   padding: 0;
-  max-width: 580px;
+
+  /* Tamaño */
   width: calc(100% - 40px);
+  max-width: 580px;
+  max-height: 85vh;
+
+  /* Aspecto */
+  border: 1px solid var(--sepia-linea, #B9A181);
   background: var(--papel-claro, #F7EFDD);
   box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
-  z-index: 100000;
   color: var(--tinta, #2B1E14);
+
+  /* Layout interno */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+
+  /* Capa */
+  z-index: 100000;
 }
 
 .cookie-modal::backdrop {
   background: rgba(26, 15, 10, 0.75);
   backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
 }
 
 .cookie-modal__form {
   display: flex;
   flex-direction: column;
   max-height: 85vh;
+  overflow: hidden;
 }
 
 .cookie-modal__header {
@@ -894,6 +912,7 @@
   align-items: center;
   padding: 22px 26px;
   border-bottom: 2px solid var(--sepia-linea, #B9A181);
+  flex-shrink: 0;
 }
 
 .cookie-modal__header h3 {
@@ -901,6 +920,7 @@
   font-size: 1.35rem;
   font-style: italic;
   color: var(--rojo-oxido, #7A2E1E);
+  margin: 0;
 }
 
 .cookie-modal__close {
@@ -910,7 +930,11 @@
   align-items: center;
   justify-content: center;
   color: var(--tinta-suave, #5A4632);
-  transition: var(--trans);
+  transition: var(--trans, 0.3s ease);
+  background: none;
+  border: none;
+  cursor: pointer;
+  flex-shrink: 0;
 }
 
 .cookie-modal__close:hover {
@@ -924,6 +948,7 @@
   overflow-x: hidden;
   display: grid;
   gap: 14px;
+  flex: 1 1 auto;
 }
 
 .cookie-option {
@@ -934,12 +959,12 @@
   padding: 16px 18px;
   background: rgba(240, 230, 210, 0.6);
   border: 1px solid rgba(122, 46, 30, 0.12);
-  min-width: 0;   /* deja que los hijos puedan encogerse */
+  min-width: 0;
 }
 
 .cookie-option > div {
   flex: 1 1 auto;
-  min-width: 0;   /* crítico: permite que el texto haga wrap */
+  min-width: 0;
 }
 
 .cookie-option strong {
@@ -956,6 +981,54 @@
   line-height: 1.45;
   color: var(--tinta-suave, #5A4632);
   margin: 0;
+}
+
+.cookie-toggle {
+  position: relative;
+  display: inline-block;
+  width: 46px;
+  height: 26px;
+  flex-shrink: 0;
+}
+
+.cookie-toggle input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.cookie-toggle__slider {
+  position: absolute;
+  inset: 0;
+  background: var(--sepia-linea, #B9A181);
+  border-radius: 999px;
+  transition: var(--trans, 0.3s ease);
+  cursor: pointer;
+}
+
+.cookie-toggle__slider::before {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  left: 3px;
+  top: 3px;
+  background: var(--papel-claro, #F7EFDD);
+  border-radius: 50%;
+  transition: var(--trans, 0.3s ease);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.cookie-toggle input:checked + .cookie-toggle__slider {
+  background: var(--rojo-oxido, #7A2E1E);
+}
+
+.cookie-toggle input:checked + .cookie-toggle__slider::before {
+  transform: translateX(20px);
+}
+
+.cookie-toggle input:focus-visible + .cookie-toggle__slider {
+  box-shadow: 0 0 0 3px rgba(122, 46, 30, 0.35);
 }
 
 .cookie-toggle--always-on {
@@ -979,6 +1052,7 @@
   gap: 10px;
   justify-content: flex-end;
   flex-wrap: wrap;
+  flex-shrink: 0;
 }
 
 /* ============================ RESPONSIVE ============================ */
