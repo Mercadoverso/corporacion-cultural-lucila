@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /assets/js/
+Disallow: /pages/privacidad.html$
+Disallow: /pages/terminos.html$
+
+Sitemap: https://corporacionlucila.cl/sitemap.xml
