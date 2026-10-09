@@ -843,31 +843,35 @@
 }
 
 /* ============================ MODAL COOKIES (base escritorio) ============================ */
+/* ============================ MODAL COOKIES (base escritorio) ============================ */
+/* ============================ MODAL COOKIES (base escritorio) ============================ */
 .cookie-modal {
   position: fixed;
-  top: 50%;
-  left: 50%;
-  right: auto;
-  bottom: auto;
-  transform: translate(-50%, -50%);
-  margin: 0;
-  inset: auto;
-
-  width: calc(100% - 40px);
-  max-width: 580px;
-  max-height: 85vh;
-
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
   padding: 0;
   border: 1px solid var(--sepia-linea, #B9A181);
   background: var(--papel-claro, #F7EFDD);
   box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
   color: var(--tinta, #2B1E14);
 
+  width: calc(100% - 40px);
+  max-width: 580px;
+  height: fit-content;
+  max-height: 85vh;
+
   display: flex;
   flex-direction: column;
   overflow: hidden;
 
   z-index: 100000;
+}
+
+.cookie-modal[open] {
+  display: flex;
 }
 
 .cookie-modal::backdrop {
@@ -1006,16 +1010,21 @@
 
 .cookie-toggle--always-on {
   font-family: var(--sans, 'Inter', sans-serif);
-  font-size: 0.62rem;
+  font-size: 0.58rem;
   color: var(--rojo-oxido, #7A2E1E);
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 1.2px;
-  white-space: nowrap;
+  letter-spacing: 0.8px;
+  white-space: normal;
   flex-shrink: 0;
-  padding: 6px 10px;
+  padding: 5px 8px;
   border: 1px solid rgba(122, 46, 30, 0.35);
   background: rgba(122, 46, 30, 0.06);
+  max-width: 80px;
+  min-width: 80px;
+  text-align: center;
+  line-height: 1.2;
+  word-break: break-word;
 }
 
 .cookie-modal__footer {
