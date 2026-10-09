@@ -1,6 +1,6 @@
 /* ==========================================================================
    COMPONENTES — Corporación Cultural Lucila
-   v3.0 · Layout 3 columnas, footer y cookies corregidos
+   v4.0 · Modal centrado con transform (funciona PC + móvil)
    ========================================================================== */
 
 /* ============================ PROYECTOS ============================ */
@@ -364,18 +364,9 @@
   margin-top: auto;
 }
 
-.artist-card .link-arrow i {
-  font-size: 0.6rem;
-  transition: var(--trans);
-}
-
-.artist-card .link-arrow:hover {
-  border-bottom-color: var(--rojo-oxido, #7A2E1E);
-}
-
-.artist-card .link-arrow:hover i {
-  transform: translateX(4px);
-}
+.artist-card .link-arrow i { font-size: 0.6rem; transition: var(--trans); }
+.artist-card .link-arrow:hover { border-bottom-color: var(--rojo-oxido, #7A2E1E); }
+.artist-card .link-arrow:hover i { transform: translateX(4px); }
 
 .artist-card--open {
   border-style: dashed;
@@ -406,6 +397,7 @@
   color: var(--papel-claro, #F7EFDD);
   border-color: var(--rojo-oxido, #7A2E1E);
 }
+
 /* ============================ DIRECTORIO ============================ */
 .board-grid {
   display: grid;
@@ -489,10 +481,7 @@
   margin-bottom: 1.8rem;
 }
 
-.contact-details {
-  display: grid;
-  gap: 20px;
-}
+.contact-details { display: grid; gap: 20px; }
 
 .contact-details li {
   display: flex;
@@ -689,11 +678,7 @@
   color: rgba(240, 230, 210, 0.75);
 }
 
-.footer-col ul {
-  display: grid;
-  gap: 10px;
-  list-style: none;
-}
+.footer-col ul { display: grid; gap: 10px; list-style: none; }
 
 .footer-col ul li a {
   font-family: var(--serif-body, 'Cormorant Garamond', serif);
@@ -787,15 +772,7 @@
   gap: 12px;
 }
 
-.footer-bottom__quote {
-  font-family: var(--serif-body, 'Cormorant Garamond', serif) !important;
-  font-style: italic;
-  font-size: 0.95rem !important;
-  color: var(--mostaza, #B8862F) !important;
-  opacity: 0.9;
-}
-
-/* ============================ COOKIES ============================ */
+/* ============================ BANNER COOKIES (base escritorio) ============================ */
 .cookie-banner {
   position: fixed;
   bottom: 20px;
@@ -865,31 +842,31 @@
   white-space: nowrap;
 }
 
-/* ============================ COOKIE MODAL ============================ */
+/* ============================ MODAL COOKIES (base escritorio) ============================ */
 .cookie-modal {
-  /* Centrado absoluto garantizado */
   position: fixed;
-  inset: 0;
-  margin: auto;
-  padding: 0;
+  top: 50%;
+  left: 50%;
+  right: auto;
+  bottom: auto;
+  transform: translate(-50%, -50%);
+  margin: 0;
+  inset: auto;
 
-  /* Tamaño */
   width: calc(100% - 40px);
   max-width: 580px;
   max-height: 85vh;
 
-  /* Aspecto */
+  padding: 0;
   border: 1px solid var(--sepia-linea, #B9A181);
   background: var(--papel-claro, #F7EFDD);
   box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
   color: var(--tinta, #2B1E14);
 
-  /* Layout interno */
   display: flex;
   flex-direction: column;
   overflow: hidden;
 
-  /* Capa */
   z-index: 100000;
 }
 
@@ -991,11 +968,7 @@
   flex-shrink: 0;
 }
 
-.cookie-toggle input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
+.cookie-toggle input { opacity: 0; width: 0; height: 0; }
 
 .cookie-toggle__slider {
   position: absolute;
@@ -1053,24 +1026,4 @@
   justify-content: flex-end;
   flex-wrap: wrap;
   flex-shrink: 0;
-}
-
-/* ============================ RESPONSIVE ============================ */
-@media (max-width: 1024px) {
-  .projects-grid,
-  .events-grid,
-  .board-grid,
-  .icon-grid,
-  .artists-grid { grid-template-columns: repeat(2, 1fr); }
-  /* ... resto igual ... */
-}
-
-@media (max-width: 640px) {
-  .projects-grid,
-  .events-grid,
-  .board-grid,
-  .icon-grid,
-  .artists-grid,
-  .footer-grid { grid-template-columns: 1fr; }
-  /* ... resto igual ... */
 }
