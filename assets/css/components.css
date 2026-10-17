@@ -905,17 +905,26 @@
 }
 
 .cookie-modal__close {
-  width: 34px;
-  height: 34px;
+  width: 40px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
   color: var(--tinta-suave, #5A4632);
-  transition: var(--trans, 0.3s ease);
-  background: none;
-  border: none;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 50%;
   cursor: pointer;
   flex-shrink: 0;
+  font-size: 1.1rem;
+  transition: var(--trans, 0.3s ease);
+  margin-left: 12px;
+}
+
+.cookie-modal__close:hover {
+  background: rgba(122, 46, 30, 0.12);
+  border-color: rgba(122, 46, 30, 0.25);
+  color: var(--rojo-oxido, #7A2E1E);
 }
 
 .cookie-modal__close:hover {

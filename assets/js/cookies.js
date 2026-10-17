@@ -1,6 +1,6 @@
 /**
  * CORPORACIÓN CULTURAL LUCILA — cookies.js
- * v3.0 · Manejo correcto del dialog con showModal + delegación captura
+ * v4.0 · Cierre explícito del modal garantizado
  */
 (() => {
   'use strict';
@@ -12,7 +12,6 @@
   const modal = document.getElementById('cookie-modal');
 
   console.log('[Cookies] Banner:', !!banner, '| Modal:', !!modal);
-  console.log('[Cookies] Soporte showModal:', modal && typeof modal.showModal === 'function');
 
   if (!banner) {
     console.warn('[Cookies] No se encontró #cookie-banner.');
@@ -55,7 +54,6 @@
     showBanner();
   } else {
     hideBanner();
-    document.dispatchEvent(new CustomEvent('cookieConsentChanged', { detail: existing }));
   }
 
   // ---- Modal ----
@@ -68,6 +66,36 @@
     return c;
   };
 
+  const closeModal = () => {
+    if (!modal) return;
+    try {
+      if (modal.open) {
+        modal.close('closed-by-user');
+        console.log('[Cookies] close() ejecutado');
+      } else {
+        modal.removeAttribute('open');
+        console.log('[Cookies] removeAttribute(open) ejecutado');
+      }
+    } catch (err) {
+      console.error('[Cookies] error al cerrar:', err);
+    }
+  };
+
+  const openModal = () => {
+    if (!modal) return;
+    const cur = read();
+    modal.querySelectorAll('input[data-cookie-category]').forEach((cb) => {
+      cb.checked = cur ? !!cur[cb.dataset.cookieCategory] : false;
+    });
+    try {
+      modal.showModal();
+      console.log('[Cookies] showModal() ejecutado');
+    } catch (err) {
+      console.error('[Cookies] showModal falló:', err);
+      modal.setAttribute('open', '');
+    }
+  };
+
   const apply = (c) => {
     save({
       essential: true,
@@ -78,43 +106,10 @@
       version: 1
     });
     hideBanner();
-    closeModal();
+    closeModal();   // ← 🔑 CIERRE EXPLÍCITO
   };
 
-  const openModal = () => {
-    if (!modal) return;
-    const cur = read();
-    modal.querySelectorAll('input[data-cookie-category]').forEach((cb) => {
-      cb.checked = cur ? !!cur[cb.dataset.cookieCategory] : false;
-    });
-
-    // 🔑 CLAVE: usar showModal(), no show()
-    try {
-      modal.showModal();
-      console.log('[Cookies] showModal() ejecutado');
-    } catch (err) {
-      console.error('[Cookies] showModal falló:', err);
-      modal.setAttribute('open', '');
-    }
-
-    // Verificar que realmente quedó abierto en modo modal
-    setTimeout(() => {
-      console.log('[Cookies] modal.open =', modal.open);
-      console.log('[Cookies] ::backdrop activo =', !!(modal.matches && modal.matches(':modal')));
-    }, 50);
-  };
-
-  const closeModal = () => {
-    if (!modal) return;
-    if (modal.open) {
-      modal.close();
-      console.log('[Cookies] close() ejecutado');
-    } else {
-      modal.removeAttribute('open');
-    }
-  };
-
-  // ---- Delegación de eventos en captura ----
+  // ---- Delegación de eventos ----
   document.addEventListener('click', (e) => {
     const trigger = e.target.closest('[data-cookie-action]');
     if (!trigger) return;
@@ -122,12 +117,26 @@
     const action = trigger.dataset.cookieAction;
     console.log('[Cookies] Acción:', action);
 
+    // Prevenir el comportamiento por defecto del botón (por si acaso)
+    e.preventDefault();
+    e.stopPropagation();
+
     switch (action) {
-      case 'accept': e.preventDefault(); apply({ analytics: true,  preferences: true,  marketing: true  }); break;
-      case 'reject': e.preventDefault(); apply({ analytics: false, preferences: false, marketing: false }); break;
-      case 'config': e.preventDefault(); openModal(); break;
-      case 'save':   e.preventDefault(); apply(getSelected()); break;
-      case 'close':  e.preventDefault(); closeModal(); break;
+      case 'accept':
+        apply({ analytics: true, preferences: true, marketing: true });
+        break;
+      case 'reject':
+        apply({ analytics: false, preferences: false, marketing: false });
+        break;
+      case 'config':
+        openModal();
+        break;
+      case 'save':
+        apply(getSelected());
+        break;
+      case 'close':
+        closeModal();
+        break;
     }
   }, true);
 
@@ -138,10 +147,9 @@
     }
   });
 
-  // Cerrar al hacer clic en el backdrop (fuera del contenido)
+  // Cerrar al hacer clic en el backdrop
   if (modal) {
     modal.addEventListener('click', (e) => {
-      // Si el click fue directamente en el dialog (no en un hijo), cerrar
       if (e.target === modal) {
         closeModal();
       }
