@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sala de Ensayo Musical | Asociación Cultural Lucila</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        :root { --paper: #F5F2EB; --ink: #1A1A1A; --red: #7A2E1E; --gold: #B8860B; --border: rgba(122, 46, 30, 0.15); --font-display: 'Playfair Display', serif; --font-body: 'Cormorant Garamond', serif; --font-sans: 'Inter', sans-serif; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background-color: var(--paper); color: var(--ink); font-family: var(--font-body); line-height: 1.8; -webkit-font-smoothing: antialiased; }
+        .nav-inner { position: fixed; top: 0; left: 0; width: 100%; padding: 15px 40px; display: flex; justify-content: space-between; align-items: center; background: rgba(245, 242, 235, 0.95); backdrop-filter: blur(8px); z-index: 100; border-bottom: 1px solid var(--border); }
+        .nav-inner img { height: 50px; width: auto; transition: transform 0.3s ease; }
+        .nav-inner img:hover { transform: scale(1.03); }
+        .btn-back { font-family: var(--font-sans); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; color: var(--red); text-decoration: none; display: flex; align-items: center; gap: 10px; transition: all 0.3s ease; padding: 8px 16px; border: 1px solid transparent; border-radius: 4px; }
+        .btn-back:hover { background-color: var(--red); color: var(--paper); gap: 15px; }
+        .main-content { max-width: 760px; margin: 140px auto 60px; padding: 0 30px; animation: fadeIn 0.8s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .header-meta { margin-bottom: 40px; }
+        .meta-num { font-family: var(--font-sans); font-size: 0.75rem; letter-spacing: 4px; color: var(--gold); margin-bottom: 20px; display: block; }
+        .tag { display: inline-block; border: 1px solid var(--red); color: var(--red); font-family: var(--font-sans); font-size: 0.65rem; letter-spacing: 2px; text-transform: uppercase; padding: 6px 16px; }
+        h1 { font-family: var(--font-display); font-size: 4rem; font-weight: 700; line-height: 1.1; letter-spacing: -1px; margin-bottom: 40px; }
+        h2 { font-family: var(--font-display); font-size: 1.8rem; font-weight: 600; margin: 50px 0 20px; }
+        p { font-size: 1.3rem; margin-bottom: 25px; color: #3a3a3a; text-align: justify; }
+        ul { margin-bottom: 30px; padding-left: 20px; }
+        li { font-size: 1.2rem; margin-bottom: 12px; color: #3a3a3a; position: relative; }
+        li::before { content: "❧"; position: absolute; left: -25px; color: var(--gold); font-size: 1rem; }
+        .inner-footer { text-align: center; margin-top: 80px; padding-bottom: 60px; }
+        .inner-footer img { max-width: 280px; height: auto; opacity: 0.9; }
+        .divider { text-align: center; margin: 60px 0; color: var(--gold); font-size: 1.5rem; opacity: 0.5; }
+        @media (max-width: 768px) { .nav-inner { padding: 15px 20px; } .nav-inner img { height: 40px; } .main-content { margin-top: 100px; padding: 0 20px; } h1 { font-size: 2.8rem; } p { font-size: 1.15rem; } .inner-footer img { max-width: 200px; } }
+    </style>
+</head>
+<body>
+    <nav class="nav-inner">
+        <a href="../index.html"><img src="../assets/img/logo-lucila-r.svg" alt="Corporación Cultural Lucila"></a>
+        <a href="../index.html" class="btn-back"><i class="fas fa-arrow-left"></i> Volver al inicio</a>
+    </nav>
+    <main class="main-content">
+        <header class="header-meta">
+            <span class="meta-num">— 04 —</span>
+            <div class="tag">Movimiento</div>
+        </header>
+        <h1>Sala de Ensayo</h1>
+        <p>La Sala de Ensayo es un espacio acondicionado acústicamente para la práctica de grupos musicales. Un lugar sencillo y funcional, tratado para contener el sonido y permitir que bandas y proyectos locales ensayen de manera cómoda y respetuosa con el entorno.</p>
+        <h2>Un espacio para la música local</h2>
+        <p>Entendemos el ensayo como un paso fundamental en el desarrollo de cualquier proyecto musical. Por ello, habilitamos esta sala para que músicos de diversos estilos puedan encontrarse a tocar, probar ideas y pulir sus repertorios. No se trata de un estudio de grabación, sino de un lugar de trabajo práctico y real para la escena musical de Los Andes.</p>
+        <p>La música tiene una presencia importante en la vida cultural de la comuna. La sala ha albergado encuentros de distintos géneros, y la demanda de espacios adecuados para ensayar ha sido una constante entre los artistas locales. Esta sala nace para responder a esa necesidad con un lugar acondicionado para el trabajo sonoro sostenido.</p>
+        <ul>
+            <li><strong>Tratamiento acústico:</strong> Aislación y acondicionamiento básico para un ensayo claro y sin interferencias.</li>
+            <li><strong>Ensayos de bandas:</strong> Espacio para grupos de rock, folclor, jazz y otros estilos locales.</li>
+            <li><strong>Práctica individual:</strong> Disponible para músicos que necesitan un lugar tranquilo para estudiar su instrumento.</li>
+            <li><strong>Encuentros musicales:</strong> Un punto de encuentro para la colaboración entre artistas de la zona.</li>
+        </ul>
+        <p>Creemos que contar con un espacio adecuado es fundamental para el desarrollo artístico. Por eso, esta sala está pensada como un aporte concreto a la escena musical local, ofreciendo condiciones reales para que los proyectos puedan ensayar, crecer y compartir su música con la comunidad.</p>
+        <div class="divider">❦</div>
+        <footer class="inner-footer">
+            <img src="../assets/img/logo-lucila-final_Mesa de trabajo 1.svg" alt="Sello Asociación Cultural de Músicos y Artistas Lucila">
+        </footer>
+    </main>
+</body>
+</html>
