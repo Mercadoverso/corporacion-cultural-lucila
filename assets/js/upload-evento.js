@@ -3,21 +3,23 @@ document.addEventListener('DOMContentLoaded', () => {
   if (!form) return;
 
   form.addEventListener('submit', async (e) => {
-    e.preventDefault(); // Detiene la recarga de la página
+    e.preventDefault(); 
     
     const fileInput = document.getElementById('evento-file');
     const feedback = form.querySelector('.form-feedback');
-    const submitBtn = form.querySelector('button[type="submit"]');
+    // Buscamos el botón por su ID para evitar conflictos
+    const submitBtn = document.getElementById('btn-submit'); 
 
-    // 1. Validación real del archivo
+    // Validación del archivo
     if (!fileInput.files || fileInput.files.length === 0) {
-      feedback.style.color = 'var(--red)';
+      feedback.style.color = 'red';
       feedback.textContent = 'Por favor, selecciona una imagen antes de enviar.';
       return;
     }
 
-    // 2. Bloquear botón mientras sube
+    // Bloquear botón
     submitBtn.disabled = true;
+    const originalText = submitBtn.innerHTML;
     submitBtn.innerHTML = 'Subiendo...';
     feedback.textContent = '';
 
@@ -25,7 +27,6 @@ document.addEventListener('DOMContentLoaded', () => {
     formData.append('evento', fileInput.files[0]);
 
     try {
-      // 3. Enviar a Cloudflare
       const response = await fetch('/api-upload', {
         method: 'POST',
         body: formData
@@ -41,11 +42,11 @@ document.addEventListener('DOMContentLoaded', () => {
         throw new Error(result.error || 'Error al subir');
       }
     } catch (error) {
-      feedback.style.color = 'var(--red)';
+      feedback.style.color = 'red';
       feedback.textContent = 'Error: ' + error.message;
     } finally {
       submitBtn.disabled = false;
-      submitBtn.innerHTML = 'Enviar';
+      submitBtn.innerHTML = originalText;
     }
   });
 });

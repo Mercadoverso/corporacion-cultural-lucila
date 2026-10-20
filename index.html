@@ -322,11 +322,12 @@
           <article class="event-card event-card--upload">
             <h3><i class="fas fa-feather-alt" aria-hidden="true"></i> Publica tu Evento</h3>
             <p>Sube tu afiche oficial (JPG/PNG/WebP, máx. 5 MB) para evaluación del comité.</p>
+            
             <form id="uploadForm" class="upload-form" enctype="multipart/form-data" novalidate>
-              <label for="evento-file" class="sr-only">Selecciona una imagen</label>
-              <input type="file" id="evento-file" name="evento" accept="image/png,image/jpeg,image/webp" required aria-describedby="upload-help" />
-              <small id="upload-help" class="sr-only">JPG, PNG o WebP. Máx 5 MB.</small>
-              <button type="submit" class="btn btn--full"><i class="fas fa-paper-plane" aria-hidden="true"></i> Enviar</button>
+              <!-- ELIMINAMOS EL LABEL OCULTO Y DEJAMOS EL INPUT VISIBLE -->
+              <input type="file" id="evento-file" name="evento" accept="image/png,image/jpeg,image/webp" required style="display: block; width: 100%; padding: 10px; margin-bottom: 10px;" />
+              
+              <button type="submit" id="btn-submit" class="btn btn--full"><i class="fas fa-paper-plane" aria-hidden="true"></i> Enviar</button>
               <p class="form-feedback" role="status" aria-live="polite"></p>
             </form>
           </article>
