@@ -1,29 +1,31 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const uploadForm = document.getElementById('uploadForm');
-  if (!uploadForm) return;
+  const form = document.getElementById('uploadForm');
+  if (!form) return;
 
-  uploadForm.addEventListener('submit', async function(e) {
-    e.preventDefault();
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault(); // Detiene la recarga de la página
     
     const fileInput = document.getElementById('evento-file');
-    const feedback = uploadForm.querySelector('.form-feedback');
-    const submitBtn = uploadForm.querySelector('button[type="submit"]');
+    const feedback = form.querySelector('.form-feedback');
+    const submitBtn = form.querySelector('button[type="submit"]');
 
-    if (!fileInput.files.length) {
+    // 1. Validación real del archivo
+    if (!fileInput.files || fileInput.files.length === 0) {
       feedback.style.color = 'var(--red)';
       feedback.textContent = 'Por favor, selecciona una imagen antes de enviar.';
       return;
     }
 
+    // 2. Bloquear botón mientras sube
     submitBtn.disabled = true;
-    const originalBtnText = submitBtn.innerHTML;
-    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Subiendo...';
+    submitBtn.innerHTML = 'Subiendo...';
     feedback.textContent = '';
 
     const formData = new FormData();
     formData.append('evento', fileInput.files[0]);
 
     try {
+      // 3. Enviar a Cloudflare
       const response = await fetch('/api-upload', {
         method: 'POST',
         body: formData
@@ -33,19 +35,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (response.ok) {
         feedback.style.color = 'green';
-        feedback.textContent = '¡Afiche subido con éxito! Esperando aprobación.';
-        uploadForm.reset();
-        console.log("Imagen subida a:", result.url); 
+        feedback.textContent = '¡Afiche subido con éxito!';
+        form.reset();
       } else {
         throw new Error(result.error || 'Error al subir');
       }
     } catch (error) {
       feedback.style.color = 'var(--red)';
-      feedback.textContent = 'Hubo un error al subir la imagen.';
-      console.error(error);
+      feedback.textContent = 'Error: ' + error.message;
     } finally {
       submitBtn.disabled = false;
-      submitBtn.innerHTML = originalBtnText;
+      submitBtn.innerHTML = 'Enviar';
     }
   });
 });

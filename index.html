@@ -286,7 +286,7 @@
       </div>
     </section>
 
-    <!-- ============ EVENTOS ============ -->
+        <!-- ============ EVENTOS ============ -->
     <section id="eventos" class="section section--paper" aria-labelledby="eventos-title">
       <div class="container">
         <header class="section-header text-center">
@@ -296,54 +296,55 @@
           <div class="header-flourish" aria-hidden="true"><span>❦</span></div>
         </header>
 
-        <aside class="upload-section">
-          <h3><i class="fas fa-feather-alt" aria-hidden="true"></i> ¿Eres socio y deseas publicar tu evento?</h3>
-          <p>Sube tu afiche o flyer oficial (JPG/PNG/WebP, máx. 5 MB) para evaluación del comité de difusión.</p>
-          <form id="uploadForm" class="upload-form" enctype="multipart/form-data" novalidate>
-            <label for="evento-file" class="sr-only">Selecciona una imagen</label>
-            <input type="file" id="evento-file" name="evento" accept="image/png,image/jpeg,image/webp" required aria-describedby="upload-help" />
-            <small id="upload-help" class="sr-only">JPG, PNG o WebP. Máx 5 MB.</small>
-            <button type="submit" class="btn"><i class="fas fa-paper-plane" aria-hidden="true"></i> Enviar para Aprobación</button>
-            <p class="form-feedback" role="status" aria-live="polite"></p>
-          </form>
-        </aside>
-      </div>
-    </section>
+        <!-- ESTILOS LOCALES PARA LA GALERÍA -->
+        <style>
+          .event-gallery { display: grid; grid-template-columns: repeat(1, 1fr); gap: 2rem; margin-top: 3rem; }
+          @media (min-width: 768px) { .event-gallery { grid-template-columns: repeat(2, 1fr); } }
+          @media (min-width: 1024px) { .event-gallery { grid-template-columns: repeat(3, 1fr); } }
+          
+          .event-card { background: #fff; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 4px 15px rgba(0,0,0,0.03); transition: transform 0.3s ease, box-shadow 0.3s ease; }
+          .event-card:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(0,0,0,0.08); }
+          
+          .event-card__image-container { width: 100%; aspect-ratio: 4 / 5; background-color: var(--paper); overflow: hidden; position: relative; }
+          .event-card__image { width: 100%; height: 100%; object-fit: cover; display: block; }
+          
+          /* Estilos para la tarjeta del formulario */
+          .event-card--upload { justify-content: center; align-items: center; padding: 2rem; text-align: center; background-color: var(--paper); border: 2px dashed var(--border); }
+          .event-card--upload h3 { font-family: var(--font-display); color: var(--red); margin-bottom: 1rem; font-size: 1.4rem; }
+          .event-card--upload p { font-size: 1rem; margin-bottom: 1.5rem; color: #555; }
+          .event-card--upload .upload-form { display: flex; flex-direction: column; gap: 1rem; width: 100%; }
+          .event-card--upload input[type="file"] { font-family: var(--font-sans); font-size: 0.85rem; width: 100%; padding: 10px; background: #fff; border: 1px solid var(--border); border-radius: 4px; cursor: pointer; }
+        </style>
 
-    <!-- ============ OPORTUNIDADES ============ -->
-    <section id="trabajo" class="section section--cream" aria-labelledby="trabajo-title">
-      <div class="container">
-        <header class="section-header text-center">
-          <span class="eyebrow">Oportunidades</span>
-          <h2 id="trabajo-title" class="title-display">Bolsa de Trabajo</h2>
-          <p class="section-lead">Espacio de vinculación laboral para artistas, gestores culturales y técnicos del sector.</p>
-          <div class="header-flourish" aria-hidden="true"><span>❦</span></div>
-        </header>
+        <div class="event-gallery">
+          
+          <!-- TARJETA 1: Formulario conectado a R2 -->
+          <article class="event-card event-card--upload">
+            <h3><i class="fas fa-feather-alt" aria-hidden="true"></i> Publica tu Evento</h3>
+            <p>Sube tu afiche oficial (JPG/PNG/WebP, máx. 5 MB) para evaluación del comité.</p>
+            <form id="uploadForm" class="upload-form" enctype="multipart/form-data" novalidate>
+              <label for="evento-file" class="sr-only">Selecciona una imagen</label>
+              <input type="file" id="evento-file" name="evento" accept="image/png,image/jpeg,image/webp" required aria-describedby="upload-help" />
+              <small id="upload-help" class="sr-only">JPG, PNG o WebP. Máx 5 MB.</small>
+              <button type="submit" class="btn btn--full"><i class="fas fa-paper-plane" aria-hidden="true"></i> Enviar</button>
+              <p class="form-feedback" role="status" aria-live="polite"></p>
+            </form>
+          </article>
 
-        <div class="icon-grid">
-          <article class="icon-card"><div class="icon-card__circle"><i class="fas fa-guitar" aria-hidden="true"></i></div><span class="icon-card__badge">Artistas</span><h3>Músicos y Bandas</h3><p>Ofertas para intérpretes, sesionistas y directores.</p><a href="#contacto" class="link-arrow">Más información <i class="fas fa-arrow-right" aria-hidden="true"></i></a></article>
-          <article class="icon-card"><div class="icon-card__circle"><i class="fas fa-paint-brush" aria-hidden="true"></i></div><span class="icon-card__badge">Artes Visuales</span><h3>Artistas Plásticos</h3><p>Convocatorias para exposiciones y residencias.</p><a href="#contacto" class="link-arrow">Más información  <i class="fas fa-arrow-right" aria-hidden="true"></i></a></article>
-          <article class="icon-card"><div class="icon-card__circle"><i class="fas fa-masks-theater" aria-hidden="true"></i></div><span class="icon-card__badge">Escénicas</span><h3>Actores y Bailarines</h3><p>Oportunidades para elencos y compañías.</p><a href="#contacto" class="link-arrow">Más información <i class="fas fa-arrow-right" aria-hidden="true"></i></a></article>
-          <article class="icon-card"><div class="icon-card__circle"><i class="fas fa-tools" aria-hidden="true"></i></div><span class="icon-card__badge">Audio Visual</span><h3>Técnicos y Producción</h3><p>Ofertas para sonidistas y escenógrafos.</p><a href="#contacto" class="link-arrow">Más información <i class="fas fa-arrow-right" aria-hidden="true"></i></a></article>
-        </div>
-      </div>
-    </section>
+          <!-- TARJETA 2: Imagen de Ejemplo -->
+          <article class="event-card">
+            <div class="event-card__image-container">
+              <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Afiche de evento" class="event-card__image">
+            </div>
+          </article>
 
-    <!-- ============ DONACIONES ============ -->
-    <section id="donaciones" class="section section--paper" aria-labelledby="donaciones-title">
-      <div class="container">
-        <header class="section-header text-center">
-          <span class="eyebrow">Solidaridad</span>
-          <h2 id="donaciones-title" class="title-display">Donaciones de Instrumentos</h2>
-          <p class="section-lead">Tu donación transforma vidas. Contribuye al desarrollo cultural de la región.</p>
-          <div class="header-flourish" aria-hidden="true"><span>❦</span></div>
-        </header>
+          <!-- TARJETA 3: Imagen de Ejemplo -->
+          <article class="event-card">
+            <div class="event-card__image-container">
+              <img src="https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Afiche de evento" class="event-card__image">
+            </div>
+          </article>
 
-        <div class="icon-grid">
-          <article class="icon-card"><div class="icon-card__circle"><i class="fas fa-guitar" aria-hidden="true"></i></div><span class="icon-card__badge">Cuerdas</span><h3>Cuerdas y Percusión</h3><p>Guitarras, bajos, violines, baterías, congas.</p><a href="#contacto" class="link-arrow">Quiero donar <i class="fas fa-arrow-right" aria-hidden="true"></i></a></article>
-          <article class="icon-card"><div class="icon-card__circle"><i class="fas fa-keyboard" aria-hidden="true"></i></div><span class="icon-card__badge">Teclados</span><h3>Teclados y Vientos</h3><p>Pianos, teclados, trompetas, saxofones.</p><a href="#contacto" class="link-arrow">Quiero donar <i class="fas fa-arrow-right" aria-hidden="true"></i></a></article>
-          <article class="icon-card"><div class="icon-card__circle"><i class="fas fa-headphones" aria-hidden="true"></i></div><span class="icon-card__badge">Audio</span><h3>Audio y Estudio</h3><p>Monitores, interfaces, micrófonos, cables.</p><a href="#contacto" class="link-arrow">Quiero donar <i class="fas fa-arrow-right" aria-hidden="true"></i></a></article>
-          <article class="icon-card"><div class="icon-card__circle"><i class="fas fa-box-open" aria-hidden="true"></i></div><span class="icon-card__badge">Materiales</span><h3>Accesorios</h3><p>Cuerdas, parches, baquetas, atriles.</p><a href="#contacto" class="link-arrow">Quiero donar <i class="fas fa-arrow-right" aria-hidden="true"></i></a></article>
         </div>
       </div>
     </section>
